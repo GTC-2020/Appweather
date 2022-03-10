@@ -65,7 +65,7 @@ export function showSunSetRise(cityName){
     
 }
 
- export function shoImageWeatherState(cityName){s
+ export function shoImageWeatherState(cityName){
     getDate(createUrl(cityName))
     .then(respone =>{
         UI_ELEMENTS.DETAIL_WEATHER.textContent = respone.weather[0].main;
