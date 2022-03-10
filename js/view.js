@@ -65,11 +65,11 @@ export function showSunSetRise(cityName){
     
 }
 
- export function shoImageWeatherState(cityName){
+ export function shoImageWeatherState(cityName){s
     getDate(createUrl(cityName))
     .then(respone =>{
         UI_ELEMENTS.DETAIL_WEATHER.textContent = respone.weather[0].main;
-        UI_ELEMENTS.FIELD_NOW_IMAGE_STATE_WEATHER.src = `http://openweathermap.org/img/wn/${respone.weather[0].icon}@4x.png`;
+        UI_ELEMENTS.FIELD_NOW_IMAGE_STATE_WEATHER.src = `https://openweathermap.org/img/wn/${respone.weather[0].icon}@4x.png`;
         
     })
     
