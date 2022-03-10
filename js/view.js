@@ -17,10 +17,9 @@ export const UI_ELEMENTS={
     DETAIL_WEATHER:document.querySelector('.weather'),
     DETAILS_SUNRISE:document.querySelector('.sunrise'),
     DETAILS_SUNSET:document.querySelector('.sunset'),
-
 }
 
-const ADD_ELEMENT_LIST_CITY =  '<div class="city_name"></div><div class="btn_delete">';
+const ADD_ELEMENT_LIST_CITY =  '<div class="city_name"></div><div class="btn_delete"></div>';
 
 export function getCityName(){
     return UI_ELEMENTS.INPUT_CITY.value;
@@ -32,7 +31,7 @@ export function showName(cityName){
          UI_ELEMENTS.FIELD_NOW_CITY_NAME.textContent = respone.name;
          UI_ELEMENTS.DETAILS_NAME_CITY.textContent = respone.name;
      })
-     .catch(err => alert('Введите им города'));
+     .catch(err => alert('Введите название города'));
  }
 
 export function  showTemperature(cityName){
@@ -42,7 +41,7 @@ export function  showTemperature(cityName){
         UI_ELEMENTS.DETAILS_TEMPERATURE_FIELD.textContent =  Math.floor(response.main.temp - 273.15);
         UI_ELEMENTS.DETAILE_FEELS_LIKE.textContent = Math.floor(response.main.feels_like - 273.15)
     })
-    .catch(err => alert('Введите им города'));
+    .catch(err => alert('Введите название города'));
   
 }
 
@@ -87,9 +86,12 @@ export function addCityLocation(){
         showTemperature(addCity.textContent);
         shoImageWeatherState(addCity.textContent);
         showSunSetRise(addCity.textContent);
-        deleteCity();
     })
+
+    addCity.querySelector('.btn_delete').addEventListener('click', deleteCity);
 }
+
+
 function deleteTask(event){
     event.currentTarget.parentNode.remove();
 }

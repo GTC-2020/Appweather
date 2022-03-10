@@ -43,14 +43,3 @@ UI_ELEMENTS.BUTTON_SEARCH.addEventListener('click',function(){
 UI_ELEMENTS.BUTTON_ADD_CITY.addEventListener('click', function(){
     addCityLocation();
 })
-
-let arr = UI_ELEMENTS.ADDED_CITY_NAME.querySelectorAll('.city_name');
-for(let key of arr){
-    key.addEventListener('click',function(){
-        showName(key.textContent);
-        showTemperature(key.textContent);
-        shoImageWeatherState(key.textContent);
-        showSunSetRise(key.textContent);
-        deleteCity()
-    })
-}

@@ -29,7 +29,7 @@ body{
     height: 45px;
 }
 .search{
-    background-image: url(img/Shape2.png);
+    background-image: url(/img/Shape2.png);
     background-repeat: no-repeat;
     border: none;
     height: 35px;
@@ -275,13 +275,18 @@ body{
 }
 
 .btn_delete{
+    background-color: rgb(241, 101, 101);
     margin-top: 10px;
     margin-right: 15px;
     position: relative;
     width: 20px;
     height: 20px;
-    background: url('img/close-icon.svg');
     background-size: 20px;
     cursor: pointer;
+    transform: rotate(45deg);
+}
+.btn_delete:active{
+    background-color: red;
+    border-radius: 50%;
     transform: rotate(45deg);
 }
