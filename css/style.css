@@ -29,7 +29,7 @@ body{
     height: 45px;
 }
 .search{
-    background-image: url(/img/Shape2.png);
+    background-image: url(img/Shape2.png);
     background-repeat: no-repeat;
     border: none;
     height: 35px;
@@ -280,7 +280,7 @@ body{
     position: relative;
     width: 20px;
     height: 20px;
-    background: url('/img/close-icon.svg');
+    background: url('img/close-icon.svg');
     background-size: 20px;
     cursor: pointer;
     transform: rotate(45deg);
