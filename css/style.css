@@ -1,0 +1,287 @@
+body{
+    font-family:'Roboto', sans-serif;
+}
+.container{
+    width: 600px;
+    height: 435px;
+    border: 1px solid rgb(8, 8, 8);
+    background-color: rgb(202, 234, 238);
+    margin:0 auto;
+}
+.search_form > input[type="text"]{
+    width:90%;
+    height: 100%;
+    border: none;
+    outline:none;
+    padding-left: 15px;
+    font-size: 18px;
+    background-color: rgb(202, 234, 238);
+    
+}
+.search_form{
+    width: 90%;
+    height: 90%;
+}
+.search_fieal{
+    width: 45px;
+    border-bottom: 1px solid black;
+    width: 600px;
+    height: 45px;
+}
+.search{
+    background-image: url(/img/Shape2.png);
+    background-repeat: no-repeat;
+    border: none;
+    height: 35px;
+    width: 35px;
+    margin: 10px;
+    position: absolute;
+    border: none;
+    background-color:transparent;
+    cursor: pointer;
+}
+.search_form>input[type="text"]::placeholder{
+    font-size: 18px;
+    color: #696969;
+    line-height: 21px;
+    font-family: 'Roboto', sans-serif;
+}
+.show_fields{
+    display: grid;
+    grid-template-columns: 300px 300px;
+}
+.tabs{
+    display: grid;
+    grid-template-columns: 100px 100px 100px;
+}
+.tabs>div:not(.tabs_buttons){
+   display: none;
+}
+
+#btn-now:checked~#now,
+#btn-details:checked~#datails,
+#btn-forecast:checked~#forecast {
+  display: block;
+}
+.tabs>input[type="radio"]{
+    display: none;
+}
+
+.tabs>label{
+    height: 45px;
+    display: inline-block;
+    text-align: center;
+    user-select: none;
+    font-size: 18px;
+    line-height: 1.5;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out;
+    cursor: pointer;
+    position: relative;
+    border-top: 1px solid black;
+    grid-row-start: 6;
+}
+#btn-now:checked~label.now,
+#btn-details:checked~label.datails,
+#btn-forecast:checked~label.forecast {
+    background-color: black;
+    color: white;
+}
+
+.tabs>label:not(:last-of-type){
+    border-right: 1px solid black;
+}
+.show_tab{
+    height: 338px;
+}
+.now{
+    display: grid;
+}
+.field_grade{
+    font-size: 70px;
+    margin-left: 10px;
+    margin-top: 10px;
+}
+.field_grade::after{
+    content: 'o';
+    font-size:35px;
+    font-weight: 900;
+    position: absolute;
+    top: 65px;
+}
+
+.fiels_state_weather>img{
+    width: 140px;
+    height: 140px;
+    margin:  auto;
+    display:block;
+    
+}
+.fiels_state_weather{
+    width: 300px;
+    height: 200px;
+   
+}
+.fiels_name_city{
+    width: 300px;
+    
+    font-size: 24px;
+    line-height: 28px;
+    padding-left: 12px;
+    display: grid;
+    grid-template-columns: 250px 22px;
+    
+}
+.shape{
+    width: 22px;
+    height: 22px;
+    cursor: pointer;
+}
+.show_tab{
+    width:300px;
+}
+.field_weather_parametrs>ul{
+    list-style: none;
+    font-size: 24px;
+    line-height: 1.8;
+    padding-top: 20px;
+    margin-left: -20px;
+}
+
+
+.name-city{
+    font-size: 24px;
+    line-height: 28px;
+    margin-left: 12px;
+    margin-top:30px;
+}
+.weathet_state li>img{
+    display:inline-block;
+    height: 7px;
+    padding-bottom:7px;
+    margin-left: -3px;
+}
+.field_weather_parametrs li>img{
+    display:inline-block;
+    height: 10px;
+    padding-bottom:10px;
+    margin-left: -3px;
+}
+
+.day_weather{
+    width: 265px;
+    height: 120px;
+    border: 2px solid black;
+    margin-top: 5px;
+    margin-left: 15px;
+}
+.show_day_field_weather{
+    width: 300px;
+    height: 250px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    overflow-y:visible;
+}
+
+.show_day_field_weather::-webkit-scrollbar {
+    display: none;
+}
+
+.weathet_state>ul{
+    list-style: none;
+    margin-left: -30px;
+    margin-top: 40px;
+}
+.weathet_state{
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    font-size: 18px;
+}
+.image_state>span{
+    display: block;
+    padding-top: 33px;
+    margin-left: 60px;
+    
+}
+.image_state>img{
+    display: block;
+    padding-top: 0px;
+    padding-left: 65px;
+
+}
+.date_time{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+.date{
+    display: block;
+    margin-left: 12px;
+    margin-top: 5px;
+}
+.time{
+    display: block;
+    margin-left: 25px;
+    margin-top: 5px;
+    padding-left:55px ;
+}
+
+
+
+
+.fiels_added_locations{
+    border-left: 1px solid black;
+    height: 390px;
+    font-size: 24px;
+    line-height: 28px;
+
+}
+.fiels_added_locations{
+    overflow-y: scroll;
+    overflow-x: hidden;
+    overflow-y:visible;
+}
+.fiels_added_locations::-webkit-scrollbar {
+    display: none;
+}
+.added_city>ul{
+    list-style: none;
+    font-size: 24px;
+    margin-left: -20px;
+    display: block;
+}
+.added_city>ul>li{
+    line-height: 1.7;
+    display: flex;
+    justify-content: space-between;
+}
+.added_city>ul>li>span{
+    cursor: pointer;
+}
+.field_title{
+    border-bottom: 1px solid black;
+    padding-left: 17px;
+    padding-bottom: 11px;
+    padding-top: 37px;
+}
+
+.search>input{
+    display: none;
+}
+.search_fieal>form{
+    width: 100%;
+}
+
+.city_name{
+    cursor: pointer;
+}
+
+.btn_delete{
+    margin-top: 10px;
+    margin-right: 15px;
+    position: relative;
+    width: 20px;
+    height: 20px;
+    background: url('/img/close-icon.svg');
+    background-size: 20px;
+    cursor: pointer;
+    transform: rotate(45deg);
+}
