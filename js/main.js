@@ -47,13 +47,12 @@ export function correctTimeByTiemZone(hourUTC, timezone, minets){
 
 
 UI_ELEMENTS.BUTTON_SEARCH.addEventListener('click',function(){
-    let cityName = getCityName();
-    showName(cityName);
-    showTemperature(cityName);
-    shoImageWeatherState(cityName);
+    showName(getCityName());
+    showTemperature(getCityName());
+    shoImageWeatherState(getCityName());
     deleteCity();
-    showSunSetRise(cityName);
-    forecast(cityName);
+    showSunSetRise(getCityName());
+    forecast(getCityName());
     UI_ELEMENTS.INPUT_CITY.value = '';
 })
 
