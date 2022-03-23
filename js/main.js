@@ -1,61 +1,71 @@
-import { UI_ELEMENTS } from "./view.js";
-import { getCityName } from "./view.js";
-import { showTemperature } from "./view.js";
-import { showName } from "./view.js";
-import { shoImageWeatherState } from "./view.js";
-import { addCityLocation } from "./view.js";
-import { deleteCity } from "./view.js";
-import { showSunSetRise } from "./view.js";
-import { forecast } from "./view.js";
+import { URL_CONST, BUTTONS, UI_ELEMENTS} from "./const.js";
+import {changeStateFieldNow, changeStateFieldDetails, changeStateFieldForcast, getInputCityName, addFavoriteCity} from "./view.js";
 
-export let listOfCity = [];
 
-const API_KEY = 'f660a2fb1e4bad108d6160b7f58c555f';
-export const SERVER_URL = 'https://api.openweathermap.org/data/2.5/weather';
-export const SERVER_URL_FORECAST = `https://api.openweathermap.org/data/2.5/forecast`
+let favoriteCityList = [];
+
+export async function getDateByCityName(cityName){
+    let cityWeather = {};
+
+    let responseWeather = await (await fetch(createUrl(URL_CONST.SERVER_URL, cityName))).json();
+    cityWeather.name = responseWeather.name;
+    cityWeather.temp = Math.floor(responseWeather.main.temp);
+    cityWeather.feels_like = Math.floor(responseWeather.main.feels_like);
+    cityWeather.sunrise = responseWeather.sys.sunrise;
+    cityWeather.sunset = responseWeather.sys.sunset;
+    cityWeather.timezone = responseWeather.timezone;
+    cityWeather.weather = responseWeather.weather[0].main;
+    cityWeather.icon = responseWeather.weather[0].icon;
+
+    let responseForcast = await (await fetch(createUrl(URL_CONST.SERVER_URL_FORCAST, cityName))).json();
+    cityWeather.list = responseForcast.list;
+
+    return cityWeather;
+}
 
 export function createUrl(url,cityName){
-    return `${url}?q=${cityName}&appid=${API_KEY}&units=metric`;
-
+    return `${url}?q=${cityName}&appid=${URL_CONST.API_KEY}&units=metric`;
 }
 
-export function getDate(url){
-    return fetch(url)
-    .then(response => response.json())
+export function formatTime(hour, minets){
+    if(hour > 24){
+        hour = hour -24;
+    }
+    if(hour < 10){
+        return `0${hour}:${minets}`;
+    }
+    return `${hour}:${minets}`;
 }
 
-export function correctTimeByTiemZone(hourUTC, timezone, minets){
-    let hour = '';
-    let minet = '';
-    let h = hourUTC + timezone / 3600;
-    if(h > 24){
-        h = h-24;
-    } 
-
-    if(h < 10){
-        hour = '0' + h;
-    }else  hour = +h;
-
-    if(minets < 10){
-        minet = '0' + minets;
-    } else minet = +minets;
-
-    return `${hour}:${minet}`;
+export function correctTimeByTiemZone(hourUTC, timezone){
+    return hourUTC + timezone / 3600;
 }
- 
 
+export function convertTimeFromMilisecumnd(millisecunds, timezone){
+    let time = new Date(millisecunds * 1000);
+    let hoursUTC = time.getUTCHours();
+    let minutes = time.getMinutes();
+   return formatTime(correctTimeByTiemZone(hoursUTC, timezone), minutes);
+}
 
+export function changeFavoriteList(cityName){
+    let isFavorite = favoriteCityList.includes(cityName);
+    if(!isFavorite){
+        favoriteCityList.push(cityName);
+    } else {
+        favoriteCityList.splice(favoriteCityList.findIndex(element => element === cityName), 1)
+    }
+    return isFavorite;
+}
 
-UI_ELEMENTS.BUTTON_SEARCH.addEventListener('click',function(){
-    showName(getCityName());
-    showTemperature(getCityName());
-    shoImageWeatherState(getCityName());
-    deleteCity();
-    showSunSetRise(getCityName());
-    forecast(getCityName());
-    UI_ELEMENTS.INPUT_CITY.value = '';
+BUTTONS.BUTTON_SEARCH.addEventListener('click', function(){
+    let cityName = getInputCityName();
+    changeStateFieldNow(cityName);
+    changeStateFieldDetails(cityName);
+    changeStateFieldForcast(cityName);
 })
 
-UI_ELEMENTS.BUTTON_ADD_CITY.addEventListener('click', function(){
-    addCityLocation();
+BUTTONS.BUTTON_ADD_FAVORITE_CITY.addEventListener('click', function(){
+    addFavoriteCity();
 })
+
