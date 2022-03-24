@@ -1,8 +1,10 @@
-import { URL_CONST, BUTTONS, UI_ELEMENTS} from "./const.js";
-import {changeStateFieldNow, changeStateFieldDetails, changeStateFieldForcast, getInputCityName, addFavoriteCity} from "./view.js";
+import { URL_CONST, BUTTONS} from "./const.js";
+import {changeStateFieldNow, changeStateFieldDetails, changeStateFieldForcast, getInputCityName, addFavoriteCity, createFavoriteListElement} from "./view.js";
+import {setLocalStorageCurrentCity, setListOfFavoriteCity} from "./storage.js"
 
 
-let favoriteCityList = [];
+export let favoriteCityList = new Set();
+const DEFAULT_CITY = "London";
 
 export async function getDateByCityName(cityName){
     let cityWeather = {};
@@ -49,23 +51,55 @@ export function convertTimeFromMilisecumnd(millisecunds, timezone){
 }
 
 export function changeFavoriteList(cityName){
-    let isFavorite = favoriteCityList.includes(cityName);
-    if(!isFavorite){
-        favoriteCityList.push(cityName);
+    let isFavorite = favoriteCityList.has(cityName);
+    if(isFavorite){
+        favoriteCityList.delete(cityName);
     } else {
-        favoriteCityList.splice(favoriteCityList.findIndex(element => element === cityName), 1)
+        favoriteCityList.add(cityName);
     }
     return isFavorite;
 }
+
+function firstLoad(){
+    let cityName = localStorage.getItem('currentFavoritCity') || DEFAULT_CITY;
+    let city = JSON.parse(localStorage.getItem('listFavoriteCity'));
+    changeStateFieldNow(cityName);
+    changeStateFieldDetails(cityName);
+    changeStateFieldForcast(cityName);
+    showCityList(city);
+    
+};
+
+export function showCityList(favoriteCityList){
+    
+    favoriteCityList.forEach((value, valueAgain,set) => {
+        changeFavoriteList(value);
+        let listElement = createFavoriteListElement();
+        listElement.querySelector('.city_name').textContent = value;
+        listElement.addEventListener('click', function(){
+            changeStateFieldNow(value);
+            changeStateFieldDetails(value);
+            changeStateFieldForcast(value);
+            setLocalStorageCurrentCity(value);
+        })
+    });
+}
+
+
+window.onload = firstLoad();
 
 BUTTONS.BUTTON_SEARCH.addEventListener('click', function(){
     let cityName = getInputCityName();
     changeStateFieldNow(cityName);
     changeStateFieldDetails(cityName);
     changeStateFieldForcast(cityName);
+    setLocalStorageCurrentCity(cityName);
 })
 
 BUTTONS.BUTTON_ADD_FAVORITE_CITY.addEventListener('click', function(){
     addFavoriteCity();
+    setListOfFavoriteCity();
+    
+
 })
 

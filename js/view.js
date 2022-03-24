@@ -1,10 +1,6 @@
-import { UI_ELEMENTS,
-         NEW_HTML_ELEMENTS } from "./const.js";
-
-import{getDateByCityName, 
-       convertTimeFromMilisecumnd,
-
-       changeFavoriteList} from "./main.js";
+import { UI_ELEMENTS,NEW_HTML_ELEMENTS } from "./const.js";
+import{getDateByCityName, convertTimeFromMilisecumnd, changeFavoriteList} from "./main.js";
+import { setLocalStorageCurrentCity, setListOfFavoriteCity } from "./storage.js";
 
 
 export  async function  changeStateFieldNow(cityName){
@@ -85,10 +81,12 @@ export function addFavoriteCity(){
             changeStateFieldNow(cityName);
             changeStateFieldDetails(cityName);
             changeStateFieldForcast(cityName);
+            setLocalStorageCurrentCity(cityName);
         })
     } else{
         deleteFavoriteCity(cityName);
     }
+    setListOfFavoriteCity();
 }
 
 function deleteFavoriteCity(cityName){

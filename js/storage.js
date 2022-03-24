@@ -1,17 +1,18 @@
-/*
-import { listOfFavoriteCity
- } from "./main.js";
 
-import 
+import { favoriteCityList} from "./main.js";
+ 
 
 
 
-export function setLocalCurrentCity(cityName){
+export function setLocalStorageCurrentCity(cityName){
     localStorage.setItem('currentFavoritCity', cityName);
 }
 
 export function setListOfFavoriteCity(){
-    localStorage.setItem('listFavoriteCity', JSON.stringify(listOfFavoriteCity));
+    let cityArray = [];
+    favoriteCityList.forEach((value, valueAgain, set)=>{
+        cityArray.push(value);
+    })
+    localStorage.setItem('listFavoriteCity', JSON.stringify(cityArray));
 }
 
-*/
