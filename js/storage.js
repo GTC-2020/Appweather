@@ -1,4 +1,3 @@
-
 import { favoriteCityList} from "./main.js";
  
 
@@ -15,4 +14,3 @@ export function setListOfFavoriteCity(){
     })
     localStorage.setItem('listFavoriteCity', JSON.stringify(cityArray));
 }
-

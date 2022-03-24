@@ -70,8 +70,8 @@ function firstLoad(){
     
 };
 
-export function showCityList(favoriteCityList){
-    
+export function showCityList(city){
+    let favoriteCityList = new Set(city)
     favoriteCityList.forEach((value, valueAgain,set) => {
         changeFavoriteList(value);
         let listElement = createFavoriteListElement();
